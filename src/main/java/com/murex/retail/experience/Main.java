@@ -1,4 +1,4 @@
-package com.murex.retail_experience;
+package com.murex.retail.experience;
 
 public class Main {
 
