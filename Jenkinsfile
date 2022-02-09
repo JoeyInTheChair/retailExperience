@@ -6,8 +6,8 @@ pipeline {
         stage('Checkout Codebase') {
             steps{
                 cleanWs()
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/main']],userRemoteConfigs:
-                [[credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git']]
+                checkout scm: [$class: 'GitSCM', branches: [ name: '*/main' ],userRemoteConfigs:
+                [ credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git' ]
             }
         }
 
@@ -16,7 +16,7 @@ pipeline {
                 sh 'mkdir lib'
                 sh 'cd lib/ ; wget https://repo1.maven.org/maven2/org/junit/platform/murex-retail-experience.jar'
                 sh 'cd src ; javac -cp "../lib/murex-retail-experience.jar" Main.java MainTest.java'
-                }
+            }
         }
 
         stage('Test') {
