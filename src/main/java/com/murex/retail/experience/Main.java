@@ -13,14 +13,21 @@ import org.apache.logging.log4j.LogManager;
 public class Main {
 
    private static final Logger logger = LogManager.getLogger(Main.class);
+   public static LinkedList<String> list = new LinkedList<>();
 
    public static void main(String[] args) throws URISyntaxException {
-      LinkedList<String> list = new LinkedList<>();
-      readCSVFileUsingNIO(list);
-      loggerPrint(list);
+      new Main().runMurexRetailExperience();
    }
 
-   public static void readCSVFileUsingNIO(LinkedList<String> list) throws URISyntaxException {
+   String runMurexRetailExperience() throws URISyntaxException {
+      readCSVFileUsingNIO();
+      for (String s : list) logger.info(s);
+      StringBuilder builder = new StringBuilder();
+      for(String s : list) builder.append(s).append("\n");
+      return builder.toString();
+   }
+
+   public static void readCSVFileUsingNIO() throws URISyntaxException {
       try {
          List<String> lines = readResourceFile();
          for(String s : lines)
@@ -32,12 +39,5 @@ public class Main {
 
    private static List<String> readResourceFile() throws IOException, URISyntaxException {
       return Files.readAllLines(Paths.get(ClassLoader.getSystemResource("Inventory.csv").toURI()));
-   }
-
-   public static void loggerPrint(LinkedList<String> list) {
-
-      for(String s : list) {
-         logger.info(s);
-      }
    }
 }
