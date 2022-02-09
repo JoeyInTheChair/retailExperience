@@ -6,8 +6,12 @@ pipeline {
         stage('Checkout Codebase') {
             steps{
                 cleanWs()
-                checkout scm: [$class: 'GitSCM', branches: [ name: '*/main' ],userRemoteConfigs:
-                [ credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git' ]
+                checkout([
+                        $class: 'GitSCM',
+                        branches: [[ name: 'feature/add-logger' ]],
+                        userRemoteConfigs:
+                            [[ credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git' ]]
+                        ])
             }
         }
 
