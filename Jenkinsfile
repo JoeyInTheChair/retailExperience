@@ -1,20 +1,10 @@
 pipeline {
 
     agent any
+    environment {
+        DEMO='1.3'
+    }
     stages {
-
-        stage('Checkout Codebase') {
-            steps{
-                cleanWs()
-                checkout([
-                        $class: 'GitSCM',
-                        branches: [[ name: 'feature/add-logger' ]],
-                        userRemoteConfigs:
-                            [[ credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git' ]]
-                        ])
-            }
-        }
-
         stage('Build') {
             steps{
                 sh 'mkdir lib'
