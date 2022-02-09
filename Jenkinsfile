@@ -12,7 +12,6 @@ pipeline {
                         userRemoteConfigs:
                             [[ credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git' ]]
                         ])
-
             }
         }
 
