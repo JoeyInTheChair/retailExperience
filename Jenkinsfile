@@ -3,16 +3,8 @@ pipeline {
     agent any
     stages {
 
-        stage('Checkout Codebase') {
-            steps{
-                cleanWs()
-                checkout([
-                        $class: 'GitSCM',
-                        branches: [[ name: 'feature/add-logger' ]],
-                        userRemoteConfigs:
-                            [[ credentialsId: 'github-ssh-key', url: 'git@github.com:JoeyInTheChair/retail.git' ]]
-                        ])
-            }
+        environment {
+            DEMO='1.3'
         }
 
         stage('Build') {
