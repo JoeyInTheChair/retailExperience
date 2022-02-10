@@ -1,9 +1,6 @@
 pipeline {
 
     agent any
-    environment {
-        DEMO='1.3'
-    }
     stages {
         stage('Build') {
             steps{
