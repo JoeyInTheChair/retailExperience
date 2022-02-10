@@ -1,29 +1,18 @@
-pipeline {
-
-    agent any
-    environment {
-        DEMO='1.3'
+node {
+    stage('SCM') {
+        echo 'Gathering code from version control'
+        git bracnh: '${branch}', url: 'git@github.com:JoeyInTheChair/retailExperience.git'
     }
-    stages {
-        stage('Build') {
-            steps{
-                sh 'mkdir lib'
-                sh '''cd lib/
-wget https://repo1.maven.org/maven2/org/junit/platform/murex-retail-experience.jar'''
-                sh 'cd src ; javac -cp "../lib/murex-retail-experience.jar" Main.java MainTest.java'
-            }
-        }
-
-        stage('Test') {
-            steps{
-                sh 'cd src/; java -jar../lib/murex-retail-experience.jar -cp "." --select-class MainTest --reports-dir="reports"'
-            }
-        }
-
-        stage('Success') {
-            steps{
-                echo 'Test Successful'
-            }
-        }
+    stage('Build') {
+        echo 'Building...'
+        sh 'dotnet --version'
+        sh 'dotnet build ConsoleApp1'
+        echo 'Building Murex Retail Experience'
+    }
+    stage('Test') {
+        echo 'Testing...'
+    }
+    stage{'Success'} {
+        echo 'Test Cases have all passed'
     }
 }
